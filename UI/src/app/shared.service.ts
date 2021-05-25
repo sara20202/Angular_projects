@@ -11,6 +11,7 @@ export class SharedService {
   readonly PhotoUrl = "https://localhost:44369/Photos";
 
   constructor(private http:HttpClient) {}
+
   getDepList():Observable<any[]>{
     return this.http.get<any>(this.ApiUrl+'/Department');
   }
