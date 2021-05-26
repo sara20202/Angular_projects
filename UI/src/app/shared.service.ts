@@ -7,13 +7,13 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class SharedService {
-  readonly ApiUrl = "https://localhost:44369/api";
-  readonly PhotoUrl = "https://localhost:44369/Photos";
+  readonly ApiUrl = "https://localhost:5001/api";
+  readonly PhotoUrl = "https://localhost:5001/Photos";
 
   constructor(private http:HttpClient) {}
 
   getDepList():Observable<any[]>{
-    return this.http.get<any>(this.ApiUrl+'/Department');
+    return this.http.get<any>(this.ApiUrl+'/department');
   }
   addDepartment(val:any){
     return this.http.post(this.ApiUrl+'/Department',val);
@@ -22,7 +22,7 @@ export class SharedService {
     return this.http.put(this.ApiUrl+'/Department',val);
   }
   deleteDepartment(val:any){
-    return this.http.delete(this.ApiUrl+'/Department'+val);
+    return this.http.delete(this.ApiUrl+'/Department/'+val);
   }
 
   getEmpList():Observable<any[]>{
@@ -42,6 +42,6 @@ export class SharedService {
     return this.http.post(this.ApiUrl+'/Employee/SaveFile',val);
   }
   getAllDepartmentNames():Observable<any[]>{
-    return this.http.get<any[]>(this.ApiUrl+ '/Employee/GetAllDepartmentNames');
+    return this.http.get<any[]>(this.ApiUrl+ '/Department/GetAllDepartmentNames');
   }
 }
