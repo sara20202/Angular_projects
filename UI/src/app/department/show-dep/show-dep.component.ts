@@ -45,6 +45,7 @@ export class ShowDepComponent implements OnInit {
   closeClick(){
     this.ActivateAddEditDepComp=false;
     this.refreshDepList();
+
   }
 
 refreshDepList(){
