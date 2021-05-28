@@ -60,11 +60,10 @@ export class AddEditEmpComponent implements OnInit {
       alert(res.toString());
     });
   }
-
-  uploadPhoto(event:any){
-    var file = event.target.file[0];
-    const formData:FormData= new FormData();
-    formData.append('UploadedFile',file,file.name);
+  uploadPhoto(event: any){
+    var file=event.target.files[0];
+    const formData:FormData=new FormData();
+    formData.append('uploadedFile',file,file.name);
 
     this.service.UploadPhoto(formData).subscribe((data:any)=>{
       this.PhotoFileName=data.toString();
