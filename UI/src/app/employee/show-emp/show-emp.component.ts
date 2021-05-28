@@ -24,7 +24,7 @@ export class ShowEmpComponent implements OnInit {
       EmployeeName:"",
       Department:"",
       DateOfJoining:"",
-      PhotoFileName:""
+      PhotoFileName:"anonymous.png"
     }
     this.ModalTitle="Add Employee";
     this.ActivateAddEditEmpComp=true;
@@ -39,7 +39,7 @@ export class ShowEmpComponent implements OnInit {
 
   deleteClick(item:any){
     if(confirm('Are you sure?')){
-      this.service.deleteEmployee(item.EmployeeeId).subscribe(data=>{
+      this.service.deleteEmployee(item.EmployeeId).subscribe(data=>{
         alert(data.toString());
         this.refreshEmpList();
       })
