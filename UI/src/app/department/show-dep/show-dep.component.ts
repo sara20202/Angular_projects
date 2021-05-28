@@ -19,6 +19,7 @@ export class ShowDepComponent implements OnInit {
   ngOnInit(): void {
     this.refreshDepList();
   }
+
   addClick(){
   this.dep ={
     DepartmentId:0,
@@ -27,6 +28,7 @@ export class ShowDepComponent implements OnInit {
   this.ModalTitle="Add Department";
   this.ActivateAddEditDepComp=true;
   }
+
   editClick(item: any){
     this.dep=item;
     this.ModalTitle="Edit Department";
@@ -34,7 +36,6 @@ export class ShowDepComponent implements OnInit {
   }
   deleteClick(item:any){
     if(confirm('Are you sure?')){
-
       this.service.deleteDepartment(item.DepartmentId).subscribe(data=>{
         alert(data.toString());
         this.refreshDepList();
@@ -45,7 +46,6 @@ export class ShowDepComponent implements OnInit {
   closeClick(){
     this.ActivateAddEditDepComp=false;
     this.refreshDepList();
-
   }
 
 refreshDepList(){

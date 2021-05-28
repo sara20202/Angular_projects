@@ -10,6 +10,7 @@ export class ShowEmpComponent implements OnInit {
   constructor(private service:SharedService) { }
 
   EmployeeList:any=[];
+
   ModalTitle:string| undefined;
   ActivateAddEditEmpComp:boolean=false;
   emp:any;
@@ -24,17 +25,18 @@ export class ShowEmpComponent implements OnInit {
       Department:"",
       DateOfJoining:"",
       PhotoFileName:""
-
     }
     this.ModalTitle="Add Employee";
     this.ActivateAddEditEmpComp=true;
   }
+
   editClick(item: any){
     this.emp=item;
     this.ModalTitle="Edit Employee";
     this.ActivateAddEditEmpComp=true;
     this.refreshEmpList();
   }
+
   deleteClick(item:any){
     if(confirm('Are you sure?')){
       this.service.deleteEmployee(item.EmployeeeId).subscribe(data=>{
@@ -47,7 +49,6 @@ export class ShowEmpComponent implements OnInit {
   closeClick(){
     this.ActivateAddEditEmpComp=false;
     this.refreshEmpList();
-
   }
 
   refreshEmpList(){
