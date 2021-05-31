@@ -36,7 +36,7 @@ export class AddEditEmpComponent implements OnInit {
     })
   }
   addEmployee(){
-    var val = {
+    let val = {
       EmployeeId:this.EmployeeId,
       EmployeeName: this.EmployeeName,
       Department: this.Department,
@@ -49,7 +49,7 @@ export class AddEditEmpComponent implements OnInit {
 
   }
   updateEmployee(){
-    var val = {
+    let val = {
       EmployeeId:this.EmployeeId,
       EmployeeName: this.EmployeeName,
       Department: this.Department,
@@ -61,7 +61,7 @@ export class AddEditEmpComponent implements OnInit {
     });
   }
   uploadPhoto(event: any){
-    var file=event.target.files[0];
+    let file=event.target.files[0];
     const formData:FormData=new FormData();
     formData.append('uploadedFile',file,file.name);
 

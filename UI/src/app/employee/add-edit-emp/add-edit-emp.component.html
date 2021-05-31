@@ -32,14 +32,16 @@
 </div>
 <button (click)="addEmployee()"
         data-dismiss="modal" *ngIf="emp.EmployeeId==0"
-        class="btn btn-primary" data-bs-dismiss="modal"
-        aria-label="Close"
->
+        class="btn btn-primary" >
+<!--        data-bs-dismiss="modal"-->
+<!--        aria-label="Close"-->
+
   Add
 </button>
 <button (click)="updateEmployee()"
         data-dismiss="modal"  *ngIf="emp.EmployeeId!==0"
         class="btn btn-primary">
+
 <!--        data-bs-dismiss="modal" ====== kjo ben mbylljen e modalit-->
 <!--        aria-label="Close"-->
 
