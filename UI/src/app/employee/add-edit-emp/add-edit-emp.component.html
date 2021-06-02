@@ -1,95 +1,101 @@
 <div class="d-flex flex-row db-highlight mb-3">
 
-<div class="form-group row " style="width:60%;"  >
+  <div class="form-group row " style="width:60%;">
 
-  <label class="col-sm-2 col-form-label">Employee Name</label>
-  <div class="col-sm-10"   [formGroup]="myGroup"     >
-    <input type="text"  class="form-control"
-           [(ngModel)]="EmployeeName"
-           placeholder="Enter Employee Name"
-           required maxlength="30" minlength="2"
-           ngModel name="name" #name="ngModel"
-     [ngModelOptions]="{standalone: true}"/>
+    <label class="col-sm-2 col-form-label">Employee Name</label>
+    <div  [formGroup]="myGroup" class="col-sm-10">
+      <input #name="ngModel"
+             (change)="log(name)"
+             [(ngModel)]="EmployeeName"
+             [ngModelOptions]="{standalone: true}"
+             class="form-control"
+             id="name"
+             maxlength="10"
+             minlength="2"
+             name="name" ngModel placeholder="Enter Employee Name" required
+             type="text"
+      />
 
-    <div *ngIf="name.invalid && (name.dirty || name.touched)"
-         class="alert alert-danger">
-      <div *ngIf="name.errors?.required">
-        Name is required.
+      <div *ngIf="name.invalid && (name.dirty || name.touched)"
+           class="alert alert-danger">
+        <div *ngIf="name.errors?.required">
+          Name is required.
+        </div>
+        <div *ngIf="name.errors?.minlength">
+          Name cannot be more than 10 characters long.
+        </div>
+        <div *ngIf="name.errors?.minlength">
+          Name must be at least {{name.errors?.minlength.requiredLength}} characters long.
+        </div>
       </div>
-      <div *ngIf="name.errors?.minlength">
-        Name cannot be more than 30 characters long.
-      </div>
-      <div *ngIf="name.errors?.minlength">
-        Name must be at least 2 characters long.
-      </div>
+
+      <!--           formControlName="firstName"-->
+      <!--           [ngClass]="{'invalid-input': myGroup.controls.firstName.invalid &&-->
+      <!--        (myGroup.controls.firstName.dirty || myGroup.touched)}"/>-->
+
+
+      <!--    <div class="invalid-feedback">-->
+      <!--      <div>First name is required</div>-->
+      <!--    </div>-->
+
+      <!--           id="name" name="name"-->
+      <!--           required minlength="4" appForbiddenName="bob"-->
+      <!--           #name="ngModel"-->
+
+      <!--    <div *ngIf="myGroup.invalid && (myGroup.dirty || myGroup.touched)"-->
+      <!--         class="alert">-->
+
+      <!--      <div *ngIf="myGroup.errors?.required">-->
+      <!--        Name is required.-->
+      <!--      </div>-->
+      <!--      <div *ngIf="myGroup.errors?.minlength">-->
+      <!--        Name must be at least 4 characters long.-->
+      <!--      </div>-->
+      <!--      <div *ngIf="myGroup.errors?.forbiddenName" >-->
+      <!--        Name cannot be Bob.-->
+      <!--      </div>-->
+
+      <!--    </div>-->
     </div>
 
-<!--           formControlName="firstName"-->
-<!--           [ngClass]="{'invalid-input': myGroup.controls.firstName.invalid &&-->
-<!--        (myGroup.controls.firstName.dirty || myGroup.touched)}"/>-->
 
+    <label class="col-sm-2 col-form-label">Department</label>
+    <div class="col-sm-10">
+      <select [(ngModel)]="Department" class="form-control">
+        <option>--Select--</option>
+        <option *ngFor="let depName of DepartmentsList">
+          {{depName.DepartmentName}}
+        </option>
+      </select>
+    </div>
 
-<!--    <div class="invalid-feedback">-->
-<!--      <div>First name is required</div>-->
-<!--    </div>-->
-
-<!--           id="name" name="name"-->
-<!--           required minlength="4" appForbiddenName="bob"-->
-<!--           #name="ngModel"-->
-
-<!--    <div *ngIf="myGroup.invalid && (myGroup.dirty || myGroup.touched)"-->
-<!--         class="alert">-->
-
-<!--      <div *ngIf="myGroup.errors?.required">-->
-<!--        Name is required.-->
-<!--      </div>-->
-<!--      <div *ngIf="myGroup.errors?.minlength">-->
-<!--        Name must be at least 4 characters long.-->
-<!--      </div>-->
-<!--      <div *ngIf="myGroup.errors?.forbiddenName" >-->
-<!--        Name cannot be Bob.-->
-<!--      </div>-->
-
-<!--    </div>-->
+    <label class="col-sm-2 col-form-label">Date of joining</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="DateOfJoining" type="date">
+    </div>
   </div>
 
 
-  <label class="col-sm-2 col-form-label">Department</label>
-  <div class="col-sm-10">
-    <select class="form-control" [(ngModel)]="Department">
-      <option>--Select--</option>
-      <option *ngFor="let depName of DepartmentsList">
-        {{depName.DepartmentName}}
-      </option>
-    </select>
-  </div>
-
-  <label class="col-sm-2 col-form-label">Date of joining</label>
-  <div class="col-sm-10">
-    <input type="date" [(ngModel)]="DateOfJoining">
+  <div class="ml-3 bg-highlight" style="width: 40%;">
+    <img [src]=PhotoFilePath height="250px;" width="200px;">
+    <input (change)="uploadPhoto($event)" class="mt-2" type="file"/>
   </div>
 </div>
-
-
-<div class="ml-3 bg-highlight" style="width: 40%;">
-  <img [src]=PhotoFilePath height="250px;" width="200px;">
-  <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
-</div>
-</div>
-<button (click)="addEmployee()"
-        data-dismiss="modal" *ngIf="emp.EmployeeId==0"
-        class="btn btn-primary" >
-<!--        data-bs-dismiss="modal"-->
-<!--        aria-label="Close"-->
+<button type="submit" (click)="addEmployee()"
+        [disabled]="this.myGroup.invalid"
+        *ngIf="emp.EmployeeId==0" class="btn btn-primary"
+        data-dismiss="modal">
+  <!--        data-bs-dismiss="modal"-->
+  <!--        aria-label="Close"-->
 
   Add
 </button>
-<button (click)="updateEmployee()"
-        data-dismiss="modal"  *ngIf="emp.EmployeeId!==0"
-        class="btn btn-primary">
+<button type="submit" (click)="updateEmployee()" [disabled]="this.myGroup.invalid"
+        *ngIf="emp.EmployeeId!==0" class="btn btn-primary"
+        data-dismiss="modal">
 
-<!--        data-bs-dismiss="modal" ====== kjo ben mbylljen e modalit-->
-<!--        aria-label="Close"-->
+  <!--        data-bs-dismiss="modal" ====== kjo ben mbylljen e modalit-->
+  <!--        aria-label="Close"-->
 
   Update
 </button>

@@ -34,11 +34,15 @@ export class AddEditEmpComponent implements OnInit {
     //     ]),
     //
     // })
+
     this.myGroup = new FormGroup({
-      firstName: new FormControl()
+      name: new FormControl(  '', Validators.minLength(2),
+              )
     });
   }
-
+  log(x:any){
+    console.log(x);
+  }
   loadDepartmentList(){
     this.service.getAllDepartmentNames().subscribe((data:any)=>{
       this.DepartmentsList=data;
