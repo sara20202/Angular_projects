@@ -1,30 +1,56 @@
 <div class="d-flex flex-row db-highlight mb-3">
 
-<div class="form-group row " style="width:60%;">
+<div class="form-group row " style="width:60%;"  >
 
   <label class="col-sm-2 col-form-label">Employee Name</label>
-  <div class="col-sm-10">
-    <input type="text"  class="form-control"     [(ngModel)]="EmployeeName"
+  <div class="col-sm-10"   [formGroup]="myGroup"     >
+    <input type="text"  class="form-control"
+           [(ngModel)]="EmployeeName"
            placeholder="Enter Employee Name"
+           required maxlength="30" minlength="2"
+           ngModel name="name" #name="ngModel"
+     [ngModelOptions]="{standalone: true}"/>
 
-           id="name" name="name"
-           required minlength="4" appForbiddenName="bob"
-           #name="ngModel"
-       >
     <div *ngIf="name.invalid && (name.dirty || name.touched)"
-         class="alert">
-
+         class="alert alert-danger">
       <div *ngIf="name.errors?.required">
         Name is required.
       </div>
       <div *ngIf="name.errors?.minlength">
-        Name must be at least 4 characters long.
+        Name cannot be more than 30 characters long.
       </div>
-      <div *ngIf="name.errors?.forbiddenName" >
-        Name cannot be Bob.
+      <div *ngIf="name.errors?.minlength">
+        Name must be at least 2 characters long.
       </div>
-
     </div>
+
+<!--           formControlName="firstName"-->
+<!--           [ngClass]="{'invalid-input': myGroup.controls.firstName.invalid &&-->
+<!--        (myGroup.controls.firstName.dirty || myGroup.touched)}"/>-->
+
+
+<!--    <div class="invalid-feedback">-->
+<!--      <div>First name is required</div>-->
+<!--    </div>-->
+
+<!--           id="name" name="name"-->
+<!--           required minlength="4" appForbiddenName="bob"-->
+<!--           #name="ngModel"-->
+
+<!--    <div *ngIf="myGroup.invalid && (myGroup.dirty || myGroup.touched)"-->
+<!--         class="alert">-->
+
+<!--      <div *ngIf="myGroup.errors?.required">-->
+<!--        Name is required.-->
+<!--      </div>-->
+<!--      <div *ngIf="myGroup.errors?.minlength">-->
+<!--        Name must be at least 4 characters long.-->
+<!--      </div>-->
+<!--      <div *ngIf="myGroup.errors?.forbiddenName" >-->
+<!--        Name cannot be Bob.-->
+<!--      </div>-->
+
+<!--    </div>-->
   </div>
 
 

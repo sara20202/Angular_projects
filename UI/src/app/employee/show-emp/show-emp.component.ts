@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService} from "../../shared.service";
 
+
 @Component({
   selector: 'app-show-emp',
   templateUrl: './show-emp.component.html',
@@ -14,6 +15,7 @@ export class ShowEmpComponent implements OnInit {
   ModalTitle:string| undefined;
   ActivateAddEditEmpComp:boolean=false;
   emp:any;
+
 
   ngOnInit(): void {
     this.refreshEmpList();

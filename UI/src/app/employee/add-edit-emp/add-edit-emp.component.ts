@@ -1,5 +1,6 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import {SharedService} from "../../shared.service";
+import {FormControl, FormGroup, Validators , FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-add-edit-emp',
@@ -7,6 +8,9 @@ import {SharedService} from "../../shared.service";
   styleUrls: ['./add-edit-emp.component.css']
 })
 export class AddEditEmpComponent implements OnInit {
+
+  public myGroup: any;
+
 
   constructor(private service:SharedService) { }
   @Input() emp:any;
@@ -19,10 +23,22 @@ export class AddEditEmpComponent implements OnInit {
 
   DepartmentsList:any[] | undefined;
 
+
+
   ngOnInit(): void {
     this.loadDepartmentList();
-
+    // this.myGroup = new FormGroup({
+    //   firstName: new FormControl(this.myGroup,
+    //     [Validators.required,
+    //       Validators.minLength(4),
+    //     ]),
+    //
+    // })
+    this.myGroup = new FormGroup({
+      firstName: new FormControl()
+    });
   }
+
   loadDepartmentList(){
     this.service.getAllDepartmentNames().subscribe((data:any)=>{
       this.DepartmentsList=data;
@@ -70,5 +86,9 @@ export class AddEditEmpComponent implements OnInit {
       this.PhotoFilePath=this.service.PhotoUrl+this.PhotoFileName;
     })
   }
+
+  // getErrors() {
+  //
+  // }
 
 }
